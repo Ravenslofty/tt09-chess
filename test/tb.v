@@ -23,14 +23,18 @@ module tb ();
   reg  cs_n;
   wire [3:0] sdi;
   wire [3:0] sdo = uo_out[7:4];
+`ifdef GL_TEST
+  wire VPWR = 1'b1;
+  wire VGND = 1'b0;
+`endif
 
   // Replace tt_um_example with your module name:
   tt_um_ravenslofty_chess user_project (
 
       // Include power ports for the Gate Level test:
 `ifdef GL_TEST
-      .VPWR(1'b1),
-      .VGND(1'b0),
+      .VPWR(VPWR),
+      .VGND(VGND),
 `endif
 
       .ui_in  ({sdi[1:0], sck, cs_n, 4'b0}), // Dedicated inputs
